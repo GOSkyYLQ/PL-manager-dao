@@ -11,26 +11,24 @@
         <result column="email" property="email" jdbcType="VARCHAR" />
         <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
         <result column="last_edit_time" property="last_edit_time)" jdbcType="TIMESTAMP" />
-        <result column="real_name" property="real_name" jdbcType="VARCHAR" />
-        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <!--<result column="real_name" property="real_name" jdbcType="VARCHAR" />-->
+        <!--<result column="mobile" property="mobile" jdbcType="VARCHAR" />-->
     </resultMap>
     <sql id="userLogin">
             SELECT user_id FROM ta_auth_user
             WHERE user_name=#{username,jdbcType=VARCHAR}
             AND password=#{password,jdbcType=VARCHAR}
-        </sql>
-    <sql id="userRegister">
-            INSERT into ta_auth_user (user_name,password,real_name,email,mobile)
+    </sql>
+    <!--sql id="userRegister">
+            INSERT into ta_auth_user (user_name,password,real_name)
             VALUES (#{user_name,jdbcType=VARCHAR},
             #{password,jdbcType=VARCHAR},
             #{real_name,jdbcType=VARCHAR},
-            #{email,jdbcType=VARCHAR},
-            #{mobile,jdbcType=VARCHAR});
-        </sql>
+        </sql-->
     <select id="userLogin" resultType="LightningProtection.pojo.ta_auth_user">
         <include refid="userLogin"/>
     </select>
-    <insert id="userRegister" parameterType="LightningProtection.pojo.ta_auth_user">
+    <!--insert id="userRegister" parameterType="LightningProtection.pojo.ta_auth_user">
         <include refid="userRegister"/>
-    </insert>
+    </insert-->
 </mapper>
