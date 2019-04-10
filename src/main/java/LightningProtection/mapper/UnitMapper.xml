@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="LightningProtection.mapper.ProjectMapper">
-    <resultMap id="ProjectInfoMap" type="LightningProtection.pojo.ta_project" >
-        <id column="id" property="id" jdbcType="BIGINT" />
+<mapper namespace="LightningProtection.mapper.UnitMapper">
+    <resultMap id="UnitInfoMap" type="LightningProtection.pojo.ta_construction_unit" >
+        <id column="id" property="id" jdbcType="INTEGER" />
         <result column="pro_name" property="pro_name" jdbcType="VARCHAR" />
-        <result column="pro_header" property="pro_header" jdbcType="VARCHAR" />
+        <result column="unit_name" property="unit_name" jdbcType="VARCHAR" />
+        <result column="unit_address" property="unit_address" jdbcType="VARCHAR" />
+        <result column="dept" property="dept" jdbcType="VARCHAR" />
+        <result column="leader" property="leader" jdbcType="VARCHAR" />
+        <result column="lea_mobile" property="lea_mobile" jdbcType="VARCHAR" />
+        <result column="hea" property="hea" jdbcType="VARCHAR" />
         <result column="hea_mobile" property="hea_mobile" jdbcType="VARCHAR" />
-        <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+        <!--<result column="create_time" property="create_time" jdbcType="TIMESTAMP" />-->
     </resultMap>
     <sql id="Example_Where_Clause" >
         <where >
@@ -67,15 +72,15 @@
         </where>
     </sql>
     <sql id="Base_Column_List" >
-    id, pro_name, pro_header, hea_mobile, create_time
+    id, pro_name,unit_name,unit_address,dept,leader,lea_mobile,hea,hea_mobile
     </sql>
-    <select id="selectByExample" resultMap="ProjectInfoMap" parameterType="LightningProtection.pojo.ta_projectExample">
+    <select id="selectByExample" resultMap="UnitInfoMap" parameterType="LightningProtection.pojo.ta_construction_unitExample">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from ta_project
+        from ta_construction_unit
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -83,14 +88,4 @@
             order by ${orderByClause}
         </if>
     </select>
-    <delete id="deleteByExample" parameterType="LightningProtection.pojo.ta_projectExample">
-        delete from ta_project
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </delete>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from ta_project
-        where id = #{id,jdbcType=BIGINT}
-    </delete>
 </mapper>

@@ -8,4 +8,6 @@ import java.util.List;
 public interface ProjectMapper {
     ta_project selectByPrimaryKey(int id);
     List<ta_project> selectByExample(ta_projectExample example);
+    void deleteByExample(ta_projectExample example);
+    void deleteByPrimaryKey(Long id);
 }
