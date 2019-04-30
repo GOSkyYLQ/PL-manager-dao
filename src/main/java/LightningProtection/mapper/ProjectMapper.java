@@ -10,4 +10,5 @@ public interface ProjectMapper {
     List<ta_project> selectByExample(ta_projectExample example);
     void deleteByExample(ta_projectExample example);
     boolean deleteByPrimaryKey(Long id);
+    int insertSelective(ta_project record);
 }
