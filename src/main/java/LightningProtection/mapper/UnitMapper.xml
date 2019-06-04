@@ -1,91 +1,162 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="LightningProtection.mapper.UnitMapper">
-    <resultMap id="UnitInfoMap" type="LightningProtection.pojo.ta_construction_unit" >
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="pro_name" property="pro_name" jdbcType="VARCHAR" />
-        <result column="unit_name" property="unit_name" jdbcType="VARCHAR" />
-        <result column="unit_address" property="unit_address" jdbcType="VARCHAR" />
-        <result column="dept" property="dept" jdbcType="VARCHAR" />
-        <result column="leader" property="leader" jdbcType="VARCHAR" />
-        <result column="lea_mobile" property="lea_mobile" jdbcType="VARCHAR" />
-        <result column="hea" property="hea" jdbcType="VARCHAR" />
-        <result column="hea_mobile" property="hea_mobile" jdbcType="VARCHAR" />
-        <!--<result column="create_time" property="create_time" jdbcType="TIMESTAMP" />-->
-    </resultMap>
-    <sql id="Example_Where_Clause" >
-        <where >
-            <foreach collection="oredCriteria" item="criteria" separator="or" >
-                <if test="criteria.valid" >
-                    <trim prefix="(" suffix=")" prefixOverrides="and" >
-                        <foreach collection="criteria.criteria" item="criterion" >
-                            <choose >
-                                <when test="criterion.noValue" >
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue" >
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue" >
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue" >
-                                    and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
-            </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause" >
-        <where >
-            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-                <if test="criteria.valid" >
-                    <trim prefix="(" suffix=")" prefixOverrides="and" >
-                        <foreach collection="criteria.criteria" item="criterion" >
-                            <choose >
-                                <when test="criterion.noValue" >
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue" >
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue" >
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue" >
-                                    and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
-            </foreach>
-        </where>
-    </sql>
-    <sql id="Base_Column_List" >
+<resultMap id="UnitInfoMap" type="LightningProtection.pojo.ta_construction_unit" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pro_name" property="pro_name" jdbcType="VARCHAR" />
+    <result column="unit_name" property="unit_name" jdbcType="VARCHAR" />
+    <result column="unit_address" property="unit_address" jdbcType="VARCHAR" />
+    <result column="dept" property="dept" jdbcType="VARCHAR" />
+    <result column="leader" property="leader" jdbcType="VARCHAR" />
+    <result column="lea_mobile" property="lea_mobile" jdbcType="VARCHAR" />
+    <result column="hea" property="hea" jdbcType="VARCHAR" />
+    <result column="hea_mobile" property="hea_mobile" jdbcType="VARCHAR" />
+    <!--<result column="create_time" property="create_time" jdbcType="TIMESTAMP" />-->
+</resultMap>
+<sql id="Example_Where_Clause" >
+    <where >
+        <foreach collection="oredCriteria" item="criteria" separator="or" >
+            <if test="criteria.valid" >
+                <trim prefix="(" suffix=")" prefixOverrides="and" >
+                    <foreach collection="criteria.criteria" item="criterion" >
+                        <choose >
+                            <when test="criterion.noValue" >
+                                and ${criterion.condition}
+                            </when>
+                            <when test="criterion.singleValue" >
+                                and ${criterion.condition} #{criterion.value}
+                            </when>
+                            <when test="criterion.betweenValue" >
+                                and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                            </when>
+                            <when test="criterion.listValue" >
+                                and ${criterion.condition}
+                                <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                    #{listItem}
+                                </foreach>
+                            </when>
+                        </choose>
+                    </foreach>
+                </trim>
+            </if>
+        </foreach>
+    </where>
+</sql>
+<sql id="Update_By_Example_Where_Clause" >
+    <where >
+        <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+            <if test="criteria.valid" >
+                <trim prefix="(" suffix=")" prefixOverrides="and" >
+                    <foreach collection="criteria.criteria" item="criterion" >
+                        <choose >
+                            <when test="criterion.noValue" >
+                                and ${criterion.condition}
+                            </when>
+                            <when test="criterion.singleValue" >
+                                and ${criterion.condition} #{criterion.value}
+                            </when>
+                            <when test="criterion.betweenValue" >
+                                and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                            </when>
+                            <when test="criterion.listValue" >
+                                and ${criterion.condition}
+                                <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                    #{listItem}
+                                </foreach>
+                            </when>
+                        </choose>
+                    </foreach>
+                </trim>
+            </if>
+        </foreach>
+    </where>
+</sql>
+<sql id="Base_Column_List" >
     id, pro_name,unit_name,unit_address,dept,leader,lea_mobile,hea,hea_mobile
     </sql>
-    <select id="selectByExample" resultMap="UnitInfoMap" parameterType="LightningProtection.pojo.ta_construction_unitExample">
-        select
-        <if test="distinct">
-            distinct
+<select id="selectByExample" resultMap="UnitInfoMap" parameterType="LightningProtection.pojo.ta_construction_unitExample">
+    select
+    <if test="distinct">
+        distinct
+    </if>
+    <include refid="Base_Column_List"/>
+    from ta_construction_unit
+    <if test="_parameter != null">
+        <include refid="Example_Where_Clause"/>
+    </if>
+    <if test="orderByClause != null">
+        order by ${orderByClause}
+    </if>
+</select>
+<delete id="deleteByExample" parameterType="LightningProtection.pojo.ta_construction_unitExample">
+    delete from ta_construction_unit
+    <if test="_parameter != null">
+        <include refid="Example_Where_Clause"/>
+    </if>
+</delete>
+<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ta_construction_unit
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+<insert id="insertSelective" parameterType="LightningProtection.pojo.ta_construction_unit">
+    insert into ta_construction_unit
+    <trim prefix="(" suffix= ")" suffixOverrides=",">
+        <if test="id != null">
+            id,
         </if>
-        <include refid="Base_Column_List"/>
-        from ta_construction_unit
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
+        <if test="pro_name != null">
+            pro_name,
         </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
+        <if test="unit_name != null">
+            unit_name,
         </if>
-    </select>
+        <if test="unit_address != null">
+            unit_address,
+        </if>
+        <if test="dept != null">
+            dept,
+        </if>
+        <if test="leader != null">
+            leader,
+        </if>
+        <if test="lea_mobile != null">
+            lea_mobile,
+        </if>
+        <if test="hea != null">
+            hea,
+        </if>
+        <if test="hea_mobile != null">
+            hea_mobile,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null" >
+            #{id,jdbcType=BIGINT},
+        </if>
+        <if test="pro_name != null" >
+            #{pro_name,jdbcType=VARCHAR},
+        </if>
+        <if test="unit_name != null" >
+            #{unit_name,jdbcType=VARCHAR},
+        </if>
+        <if test="unit_address != null" >
+            #{unit_address,jdbcType=VARCHAR},
+        </if>
+        <if test="dept!= null" >
+            #{dept,jdbcType=VARCHAR},
+        </if>
+        <if test="leader != null" >
+            #{leader,jdbcType=VARCHAR},
+        </if>
+        <if test="lea_mobile != null" >
+            #{lea_mobile,jdbcType=VARCHAR},
+        </if>
+        <if test="hea != null" >
+            #{hea,jdbcType=VARCHAR},
+        </if>
+        <if test="hea_mobile != null" >
+            #{hea_mobile,jdbcType=VARCHAR},
+        </if>
+    </trim>
+</insert>
 </mapper>

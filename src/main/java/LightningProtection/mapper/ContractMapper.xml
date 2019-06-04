@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="LightningProtection.mapper.ProjectMapper">
-    <resultMap id="ProjectInfoMap" type="LightningProtection.pojo.ta_project" >
-        <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="pro_name" property="pro_name" jdbcType="VARCHAR" />
-        <result column="pro_header" property="pro_header" jdbcType="VARCHAR" />
-        <result column="hea_mobile" property="hea_mobile" jdbcType="VARCHAR" />
-        <result column="pro_budget" property="pro_budget" jdbcType="VARCHAR" />
-        <result column="create_time" property="create_time" jdbcType="VARCHAR" />
-        <result column="pro_status" property="pro_status" jdbcType="VARCHAR" />
+<mapper namespace="LightningProtection.mapper.ContractMapper">
+    <resultMap id="ContractInfoMap" type="LightningProtection.pojo.ta_contract" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="contract_name" property="contract_name" jdbcType="VARCHAR" />
+        <result column="sign_date" property="sign_date" jdbcType="VARCHAR" />
+        <result column="contract_amount" property="contract_amount" jdbcType="BIGINT" />
+        <result column="received_amount" property="received_amount" jdbcType="BIGINT" />
+        <result column="receivable_amount" property="receivable_amount" jdbcType="BIGINT" />
+        <result column="payment_method" property="payment_method" jdbcType="VARCHAR" />
+        <result column="invoice_provide" property="invoice_provide" jdbcType="VARCHAR" />
+        <!--<result column="create_time" property="create_time" jdbcType="TIMESTAMP" />-->
     </resultMap>
     <sql id="Example_Where_Clause" >
         <where >
@@ -69,15 +71,15 @@
         </where>
     </sql>
     <sql id="Base_Column_List" >
-    id, pro_name, pro_header, hea_mobile, pro_budget, create_time, pro_status
+    id, contract_name, sign_date, contract_amount, received_amount, receivable_amount, payment_method, invoice_provide
     </sql>
-    <select id="selectByExample" resultMap="ProjectInfoMap" parameterType="LightningProtection.pojo.ta_projectExample">
+    <select id="selectByExample" resultMap="ContractInfoMap" parameterType="LightningProtection.pojo.ta_contractExample">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from ta_project
+        from ta_contract
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -85,111 +87,69 @@
             order by ${orderByClause}
         </if>
     </select>
-    <delete id="deleteByExample" parameterType="LightningProtection.pojo.ta_projectExample">
-        delete from ta_project
+    <delete id="deleteByExample" parameterType="LightningProtection.pojo.ta_contractExample">
+        delete from ta_contract
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from ta_project
+        delete from ta_contract
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insertSelective" parameterType="LightningProtection.pojo.ta_project">
-        insert into ta_project
+    <insert id="insertSelective" parameterType="LightningProtection.pojo.ta_contract">
+        insert into ta_contract
         <trim prefix="(" suffix= ")" suffixOverrides=",">
             <if test="id != null">
-              id,
+                id,
             </if>
-            <if test="pro_name != null">
-                pro_name,
+            <if test="contract_name != null">
+               contract_name,
             </if>
-            <if test="pro_header != null">
-                pro_header,
+            <if test="sign_date != null">
+                sign_date,
             </if>
-            <if test="hea_mobile != null">
-                hea_mobile,
+            <if test="contract_amount != null">
+                contract_amount,
             </if>
-            <if test="pro_budget != null">
-                pro_budget,
+            <if test="received_amount != null">
+                received_amount,
             </if>
-            <if test="create_time != null">
-                create_time,
+            <if test="receivable_amount != null">
+                receivable_amount,
             </if>
-            <if test="pro_status != null">
-                pro_status,
+            <if test="payment_method != null">
+                payment_method,
+            </if>
+            <if test="invoice_provide != null">
+                invoice_provide,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >
                 #{id,jdbcType=BIGINT},
             </if>
-            <if test="pro_name != null" >
-                #{pro_name,jdbcType=VARCHAR},
+            <if test="contract_name != null" >
+                #{contract_name,jdbcType=VARCHAR},
             </if>
-            <if test="pro_header != null" >
-                #{pro_header,jdbcType=VARCHAR},
+            <if test="sign_date != null" >
+                #{sign_date,jdbcType=VARCHAR},
             </if>
-            <if test="hea_mobile != null" >
-                #{hea_mobile,jdbcType=VARCHAR},
+            <if test="contract_amount != null" >
+                #{contract_amount,jdbcType=VARCHAR},
             </if>
-            <if test="pro_budget != null" >
-                #{pro_budget,jdbcType=VARCHAR},
+            <if test="received_amount!= null" >
+                #{received_amount,jdbcType=VARCHAR},
             </if>
-            <if test="create_time != null" >
-                #{create_time,jdbcType=VARCHAR},
+            <if test="receivable_amount != null" >
+                #{receivable_amount,jdbcType=VARCHAR},
             </if>
-            <if test="pro_status != null" >
-                #{pro_status,jdbcType=VARCHAR},
+            <if test="payment_method != null" >
+                #{payment_method,jdbcType=VARCHAR},
+            </if>
+            <if test="invoice_provide != null" >
+                #{invoice_provide,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="LightningProtection.pojo.ta_project" >
-        update ta_project
-        <set >
-            <if test="pro_name != null" >
-                pro_name = #{pro_name,jdbcType=VARCHAR},
-            </if>
-            <if test="pro_header != null" >
-                pro_header = #{pro_header,jdbcType=VARCHAR},
-            </if>
-            <if test="hea_mobile != null" >
-                hea_mobile = #{hea_mobile,jdbcType=VARCHAR},
-            </if>
-            <if test="pro_budget != null" >
-                pro_budget = #{pro_budget,jdbcType=VARCHAR},
-            </if>
-            <if test="create_time != null" >
-                create_time = #{create_time,jdbcType=VARCHAR},
-            </if>
-            <if test="pro_status != null" >
-                pro_status = #{pro_status,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-    <update id="UpdateByPrimaryKeySelective" parameterType="LightningProtection.pojo.ta_project" >
-        update ta_project
-        <set >
-            <if test="pro_name != null" >
-                pro_name = #{pro_name,jdbcType=VARCHAR},
-            </if>
-            <if test="pro_header != null" >
-                pro_header = #{pro_header,jdbcType=VARCHAR},
-            </if>
-            <if test="hea_mobile != null" >
-                hea_mobile = #{hea_mobile,jdbcType=VARCHAR},
-            </if>
-            <if test="pro_budget != null" >
-                pro_budget = #{pro_budget,jdbcType=VARCHAR},
-            </if>
-            <if test="create_time != null" >
-                create_time = #{create_time,jdbcType=VARCHAR},
-            </if>
-            <if test="pro_status != null" >
-                pro_status = #{pro_status,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
 </mapper>

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="LightningProtection.mapper.ProjectMapper">
-    <resultMap id="ProjectInfoMap" type="LightningProtection.pojo.ta_project" >
-        <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="pro_name" property="pro_name" jdbcType="VARCHAR" />
-        <result column="pro_header" property="pro_header" jdbcType="VARCHAR" />
-        <result column="hea_mobile" property="hea_mobile" jdbcType="VARCHAR" />
-        <result column="pro_budget" property="pro_budget" jdbcType="VARCHAR" />
-        <result column="create_time" property="create_time" jdbcType="VARCHAR" />
-        <result column="pro_status" property="pro_status" jdbcType="VARCHAR" />
+<mapper namespace="LightningProtection.mapper.AssetsMapper">
+    <resultMap id="AssetsInfoMap" type="LightningProtection.pojo.ta_assets" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="assets_name" property="assets_name" jdbcType="VARCHAR" />
+        <result column="used_dept" property="used_dept" jdbcType="VARCHAR" />
+        <result column="used_user" property="used_user" jdbcType="VARCHAR"/>
+        <result column="purchase_price" property="purchase_price" jdbcType="BIGINT" />
+        <result column="purchase_date" property="purchase_date" jdbcType="VARCHAR" />
+        <result column="purchase_user" property="purchase_user" jdbcType="VARCHAR" />
+        <!--<result column="create_time" property="create_time" jdbcType="TIMESTAMP" />-->
     </resultMap>
     <sql id="Example_Where_Clause" >
         <where >
@@ -69,15 +70,15 @@
         </where>
     </sql>
     <sql id="Base_Column_List" >
-    id, pro_name, pro_header, hea_mobile, pro_budget, create_time, pro_status
+    id, assets_name, used_dept, used_user, purchase_price, purchase_date, purchase_user
     </sql>
-    <select id="selectByExample" resultMap="ProjectInfoMap" parameterType="LightningProtection.pojo.ta_projectExample">
+    <select id="selectByExample" resultMap="AssetsInfoMap" parameterType="LightningProtection.pojo.ta_assetsExample">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from ta_project
+        from ta_assets
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -85,111 +86,63 @@
             order by ${orderByClause}
         </if>
     </select>
-    <delete id="deleteByExample" parameterType="LightningProtection.pojo.ta_projectExample">
-        delete from ta_project
+    <delete id="deleteByExample" parameterType="LightningProtection.pojo.ta_assetsExample">
+        delete from ta_assets
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from ta_project
+        delete from ta_assets
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insertSelective" parameterType="LightningProtection.pojo.ta_project">
-        insert into ta_project
+    <insert id="insertSelective" parameterType="LightningProtection.pojo.ta_assets">
+        insert into ta_assets
         <trim prefix="(" suffix= ")" suffixOverrides=",">
             <if test="id != null">
-              id,
+                id,
             </if>
-            <if test="pro_name != null">
-                pro_name,
+            <if test="assets_name != null">
+                assets_name,
             </if>
-            <if test="pro_header != null">
-                pro_header,
+            <if test="used_dept != null">
+                used_dept,
             </if>
-            <if test="hea_mobile != null">
-                hea_mobile,
+            <if test="used_user != null">
+                used_user,
             </if>
-            <if test="pro_budget != null">
-                pro_budget,
+            <if test="purchase_price != null">
+                purchase_price,
             </if>
-            <if test="create_time != null">
-                create_time,
+            <if test="purchase_date != null">
+                purchase_date,
             </if>
-            <if test="pro_status != null">
-                pro_status,
+            <if test="purchase_user != null">
+                purchase_user,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >
                 #{id,jdbcType=BIGINT},
             </if>
-            <if test="pro_name != null" >
-                #{pro_name,jdbcType=VARCHAR},
+            <if test="assets_name != null" >
+                #{assets_name,jdbcType=VARCHAR},
             </if>
-            <if test="pro_header != null" >
-                #{pro_header,jdbcType=VARCHAR},
+            <if test="used_dept != null" >
+                #{used_dept,jdbcType=VARCHAR},
             </if>
-            <if test="hea_mobile != null" >
-                #{hea_mobile,jdbcType=VARCHAR},
+            <if test="used_user != null" >
+                #{used_user,jdbcType=VARCHAR},
             </if>
-            <if test="pro_budget != null" >
-                #{pro_budget,jdbcType=VARCHAR},
+            <if test="purchase_price!= null" >
+                #{purchase_price,jdbcType=BIGINT},
             </if>
-            <if test="create_time != null" >
-                #{create_time,jdbcType=VARCHAR},
+            <if test="purchase_date != null" >
+                #{purchase_date,jdbcType=VARCHAR},
             </if>
-            <if test="pro_status != null" >
-                #{pro_status,jdbcType=VARCHAR},
+            <if test="purchase_user != null" >
+                #{purchase_user,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="LightningProtection.pojo.ta_project" >
-        update ta_project
-        <set >
-            <if test="pro_name != null" >
-                pro_name = #{pro_name,jdbcType=VARCHAR},
-            </if>
-            <if test="pro_header != null" >
-                pro_header = #{pro_header,jdbcType=VARCHAR},
-            </if>
-            <if test="hea_mobile != null" >
-                hea_mobile = #{hea_mobile,jdbcType=VARCHAR},
-            </if>
-            <if test="pro_budget != null" >
-                pro_budget = #{pro_budget,jdbcType=VARCHAR},
-            </if>
-            <if test="create_time != null" >
-                create_time = #{create_time,jdbcType=VARCHAR},
-            </if>
-            <if test="pro_status != null" >
-                pro_status = #{pro_status,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-    <update id="UpdateByPrimaryKeySelective" parameterType="LightningProtection.pojo.ta_project" >
-        update ta_project
-        <set >
-            <if test="pro_name != null" >
-                pro_name = #{pro_name,jdbcType=VARCHAR},
-            </if>
-            <if test="pro_header != null" >
-                pro_header = #{pro_header,jdbcType=VARCHAR},
-            </if>
-            <if test="hea_mobile != null" >
-                hea_mobile = #{hea_mobile,jdbcType=VARCHAR},
-            </if>
-            <if test="pro_budget != null" >
-                pro_budget = #{pro_budget,jdbcType=VARCHAR},
-            </if>
-            <if test="create_time != null" >
-                create_time = #{create_time,jdbcType=VARCHAR},
-            </if>
-            <if test="pro_status != null" >
-                pro_status = #{pro_status,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
 </mapper>
